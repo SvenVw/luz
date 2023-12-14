@@ -437,7 +437,7 @@ luz_callback_lr_scheduler <- luz_callback(
     self[[call_on]] <- function() {
       if ("metrics" %in% names(formals(self$scheduler$step))) {
         current_loss <- ctx$loss[[self$opt_name]]
-        self$scheduler$step(current_loss)
+        self$scheduler$step(current_loss$to(device = 'cpu'))
       } else {
         self$scheduler$step()
       }
